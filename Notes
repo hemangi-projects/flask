@@ -1,0 +1,165 @@
+Below are some facts about Python Programming Language:
+
+    Python is currently the most widely used multi-purpose, high-level programming language.
+    Python allows programming in Object-Oriented and Procedural paradigms.
+    Python programs generally are smaller than other programming languages like Java. Programmers have to type relatively less and indentation requirement of the language, makes them readable all the time.
+    Python language is being used by almost all tech-giant companies like – Google, Amazon, Facebook, Instagram, Dropbox, Uber… etc.
+    The biggest strength of Python is huge collection of standard library which can be used for the following:
+        Machine Learning
+        GUI Applications (like Kivy, Tkinter, PyQt etc. )
+        Web frameworks like Django (used by YouTube, Instagram, Dropbox)
+        Image processing (like OpenCV, Pillow)
+        Web scraping (like Scrapy, BeautifulSoup, Selenium)
+        Test frameworks
+        Multimedia
+        Scientific computing
+        Text processing and many more..
+        
+ Defination : Python is a widely used general-purpose, high level programming language. It was created by Guido van Rossum in 1991 and further developed by the Python Software Foundation. It was designed with an emphasis on code readability, and its syntax allows programmers to express their concepts in fewer lines of code.
+ 
+ take user input : input("type your name")
+ 
+ Python have 4 types of built in Data Structures namely List, Dictionary, Tuple and Set.
+ LIST : List is the most basic Data Structure in python. List is a mutable data structure i.e items can be added to list later after the list creation. It’s like you are going to shop at the local market and made a list of some items and later on you can add more and more items to the list.
+append() function is used to add data to the list.
+
+__name__ is a built-in variable which evaluates to the name of the current module
+
+Python files can act as either reusable modules, or as standalone programs. if __name__ == “main”: is used to execute some code only if the file was run directly, and not imported.
+
+Python files can act as either reusable modules, or as standalone programs. if __name__ == “main”: is used to execute some code only if the file was run directly, and not imported.
+
+
+PYHTON LANGUAGE FEATURE:
+    Interpreted
+        There are no separate compilation and execution steps like C and C++.
+        Directly run the program from the source code.
+        Internally, Python converts the source code into an intermediate form called bytecodes which is then translated into native language of specific computer to run it.
+        No need to worry about linking and loading with libraries, etc.
+    Platform Independent
+        Python programs can be developed and executed on multiple operating system platforms.
+        Python can be used on Linux, Windows, Macintosh, Solaris and many more.
+    Free and Open Source; Redistributable
+    High-level Language
+        In Python, no need to take care about low-level details such as managing the memory used by the program.
+    Simple
+        Closer to English language;Easy to Learn
+        More emphasis on the solution to the problem rather than the syntax
+    Embeddable
+        Python can be used within C/C++ program to give scripting capabilities for the program’s users.
+    Robust:
+        Exceptional handling features
+        Memory management techniques in built
+    Rich Library Support
+        The Python Standard Library is vary vast.
+        Known as the “batteries included” philosophy of Python ;It can help do various things involving regular expressions, documentation generation, unit testing, threading, databases, web browsers, CGI, email, XML, HTML, WAV files, cryptography, GUI and many more.
+        Besides the standard library, there are various other high-quality libraries such as the Python Imaging Library which is an amazingly simple image manipulation library.
+
+
+
+Main Difference between 2 and 3:
+    Division operator
+    print function
+    Unicode
+    xrange
+    Error Handling
+    _future_ module
+    
+    
+    
+print function and its parameter.
+    Syntax: print(value(s), sep= ‘ ‘, end = ‘\n’, file=file, flush=flush)
+
+    Parameters: 
+
+        value(s) : Any value, and as many as you like. Will be converted to string before printed
+        sep=’separator’ : (Optional) Specify how to separate the objects, if there is more than one.Default :’ ‘
+        end=’end’: (Optional) Specify what to print at the end.Default : ‘\n’
+        file : (Optional) An object with a write method. Default :sys.stdout
+        flush : (Optional) A Boolean, specifying if the output is flushed (True) or buffered (False). Default: False
+
+    Returns: It returns output to the screen.
+    
+    
+    
+Python Datatypes
+string=A string is a sequence of characters. It can be declared in python by using double-quotes. Strings are immutable, i.e., they cannot be changed.
+list=Lists are one of the most powerful tools in python. They are just like the arrays declared in other languages. But the most powerful thing is that list need not be always homogeneous. A single list can contain strings, integers, as well as objects. Lists can also be used for implementing stacks and queues. Lists are mutable, i.e., they can be altered once declared.
+tuples=A tuple is a sequence of immutable Python objects. Tuples are just like lists with the exception that tuples cannot be changed once declared. Tuples are usually faster than lists.
+dictionary = Dictionary in Python is an unordered collection of data values, used to store data values like a map, which, unlike other Data Types that hold only a single value as an element, Dictionary holds key:value pair. Key-value is provided in the dictionary to make it more optimized. 
+ 
+
+Note – Keys in a dictionary don’t allow Polymorphism.
+
+    Disclamer: It is important to note that Dictionaries have been modified to maintain insertion order with the release of Python 3.7, so they are now ordered collection of data values.
+
+
+Meethods for delete item or dict.
+Using del keyword
+
+In Python Dictionary, deletion of keys can be done by using the del keyword. Using the del keyword, specific values from a dictionary as well as the whole dictionary can be deleted. Items in a Nested dictionary can also be deleted by using the del keyword and providing a specific nested key and particular key to be deleted from that nested Dictionary.
+ 
+
+
+Note: The del Dict will delete the entire dictionary and hence printing it after deletion will raise an Error.
+
+Using pop() method
+
+Pop() method is used to return and delete the value of the key specified.
+e.g = pop_ele = Dict.pop(1)
+
+Using popitem() method
+
+The popitem() returns and removes an arbitrary element (key, value) pair from the dictionary.
+e.g =pop_ele = Dict.popitem()
+
+Using clear() method
+
+All the items from a dictionary can be deleted at once by using clear() method.
+e.g = Dict.clear()
+Methods	Description
+copy() =	They copy() method returns a shallow copy of the dictionary.
+clear() = The clear() method removes all items from the dictionary.
+pop() =	Removes and returns an element from a dictionary having the given key.
+popitem() =	Removes the arbitrary key-value pair from the dictionary and returns it as tuple.
+get() =	It is a conventional method to access a value for a key.
+dictionary_name.values() =	returns a list of all the values available in a given dictionary.
+str() =	Produces a printable string representation of a dictionary.
+update() =	Adds dictionary dict2’s key-values pairs to dict
+setdefault()	= Set dict[key]=default if key is not already in dict
+keys() =	Returns list of dictionary dict’s keys
+items() =	Returns a list of dict’s (key, value) tuple pairs
+has_key() =	Returns true if key in dictionary dict, false otherwise
+fromkeys() =	Create a new dictionary with keys from seq and values set to value.
+type() =	Returns the type of the passed variable.
+cmp() =	Compares elements of both dict.
+
+
+
+defaultdict = import collections
+ 
+# declaring defaultdict
+# sets default value 'Key Not found' to absent keys
+defd = collections.defaultdict(lambda : 'Key Not found')
+ 
+# initializing values
+defd['a'] = 1
+ 
+# initializing values
+defd['b'] = 2
+ 
+# printing value
+print ("The value associated with 'a' is : ",end="")
+print (defd['a'])
+ 
+# printing value associated with 'c'
+print ("The value associated with 'c' is : ",end="")
+print (defd['c'])
+
+Output : 
+ 
+
+The value associated with 'a' is : 1
+The value associated with 'c' is : Key Not found
+
+
