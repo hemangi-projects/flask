@@ -4,10 +4,10 @@ from functools import wraps
 from models.users import UserModel
 import json
 import uuid
-from  werkzeug.security import generate_password_hash, check_password_hash
 from db import db
+from  werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
-auth = Blueprint('auth', __name__)
+from __main__ import app
 
 def token_required(f):
     @wraps(f)
@@ -35,7 +35,7 @@ def token_required(f):
 
     return decorated
 
-@auth.route('/add_user', methods=["POST"])
+@app.route('/add_user', methods=["POST"])
 def add_user():
     values = json.loads(request.data)
     if values.get('username', False) and values.get('password', False):
@@ -43,7 +43,9 @@ def add_user():
             public_id=str(uuid.uuid4()),
             username=values.get('username', False),
             password=generate_password_hash(values.get('password', False)),
-            type=values['type'] if values.get('type',False) else 'student'
+            type=values['type'] if values.get('type',False) else 'student',
+            avg_marks = 0.0,
+            exam_count=0
         )
         db.session.add(user)
         db.session.commit()
@@ -51,7 +53,7 @@ def add_user():
     else:
         return json.dumps({'status_code': 404, 'error': 'UserName and Password can not be blank'})
 
-@auth.route('/login', methods=["POST"])
+@app.route('/login', methods=["POST"])
 def login_todo():
     values = json.loads(request.data)
     if values.get('username', False) and values.get('password', False):
