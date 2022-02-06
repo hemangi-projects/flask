@@ -105,29 +105,30 @@ def add_question(current_user):
         db.session.commit()
         ans1 = AnswerModel(
             name=values['ans1'],
-            question_id=question.id,
             is_true=True if values['true_ans'] == 'ans1' else False
         )
         db.session.add(ans1)
+        question.answer_ids.append(ans1)
         ans2 = AnswerModel(
             name=values['ans2'],
-            question_id=question.id,
             is_true=True if values['true_ans'] == 'ans2' else False
         )
         db.session.add(ans2)
+        question.answer_ids.append(ans2)
         ans3 = AnswerModel(
             name=values['ans3'],
-            question_id=question.id,
             is_true=True if values['true_ans'] == 'ans3' else False
         )
         db.session.add(ans3)
+        question.answer_ids.append(ans3)
         ans4 = AnswerModel(
             name=values['ans4'],
-            question_id=question.id,
             is_true=True if values['true_ans'] == 'ans4' else False
         )
         db.session.add(ans4)
+        question.answer_ids.append(ans4)
         db.session.commit()
+
         return make_response(jsonify({'message': 'Question and Answer Added Successfully'}), 200)
     else:
         return make_response(jsonify({'message': 'Name can not be blank'}), 404)
@@ -139,7 +140,44 @@ def get_question_list(current_user):
     questions = QuestionModel.query.filter_by().all()
     question_list = []
     for que in questions:
-        ans = AnswerModel.query.filter(AnswerModel.question_id==que.id).all()
-        true_ans = AnswerModel.query.filter(AnswerModel.question_id == que.id,AnswerModel.is_true).first()
-        question_list.append({'name':que.name,'ans1':ans[0].name,'ans2':ans[1].name,'ans3':ans[2].name,'ans4':ans[3].name,'Correct Answer':true_ans.name})
+        true_ans = AnswerModel.query.filter(AnswerModel.id.in_([i.id for i in que.answer_ids]),AnswerModel.is_true).first()
+        question_list.append({'name':que.name,'ans1':que.answer_ids[0].name,'ans2':que.answer_ids[1].name,'ans3':que.answer_ids[2].name,'ans4':que.answer_ids[3].name,'Correct Answer':true_ans.name})
     return jsonify({'Questions': question_list})
+
+
+@app.route('/choose_topic',methods=['POST'])
+@token_required
+def chose_topic(current_user):
+    values = json.loads(request.data)
+    topic = TopicModel.query.filter_by(name=values['topic']).first()
+    if not topic:
+        return make_response(jsonify({'message': 'Topic not found in database'}), 404)
+    current_user.current_topic_id = topic.id
+    question_ids = QuestionModel.query.filter(QuestionModel.topic_id == topic.id).all()
+    question_list = []
+    for que in question_ids:
+        question = {'Question':que.name,
+         'Options':[{
+             'answer': ans.name,
+         } for ans in que.answer_ids]}
+        question_list.append(question)
+    return make_response(jsonify(question_list),200)
+
+@app.route('/check_answer',methods=['POST'])
+@token_required
+def check_answer(current_user):
+    values = json.loads(request.data)
+    count=0
+    if values.get('questions',False):
+        for que in values['questions']:
+            question = QuestionModel.query.filter(QuestionModel.name == que['name']).first()
+            ans = AnswerModel.query.filter(AnswerModel.name == que['answer']).first()
+            if question and ans and ans.is_true and ans.id in [i.id for i in question.answer_ids]:
+                count+=1
+            if not question or not ans:
+                return make_response(jsonify({'message':'Question or answer not found in database'}),404)
+        current_user.exam_count = current_user.exam_count + 1
+        current_user.avg_marks = (current_user.avg_marks+count)/current_user.exam_count
+        db.session.commit()
+        return make_response(jsonify({'Message':'Your score is %s'%count}),200)
+    return make_response(jsonify({'message':'please check your input'}),404)

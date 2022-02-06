@@ -66,4 +66,5 @@ def login_todo():
             }, app.config['SECRET_KEY'])
 
             return make_response(jsonify({'token': token.decode('UTF-8')}), 201)
+            # return make_response(jsonify({'token': token}), 201)
     return make_response(jsonify({'error': 'Wrong UserName or Password'}), 404)

@@ -5,17 +5,25 @@ class UserModel(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    public_id = db.Column(db.String(50), unique=True)
-    username = db.Column(db.String(80),unique=True)
+    username = db.Column(db.String(80))
     password = db.Column(db.String(80))
-    type = db.Column(db.String(10))
-    avg_marks = db.Column(db.Float())
-    exam_count = db.Column(db.Integer())
-    current_topic_id = db.Column(db.Integer, db.ForeignKey('topic.id'))
-    topic = db.relationship('TopicModel')
+
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
+    def json(self):
+        return {
+            'id': self.id,
+            'username': self.username
+        }
 
     def save_to_db(self):
         db.session.add(self)
+        db.session.commit()
+    
+    def delete_from_db(self):
+        db.session.delete(self)
         db.session.commit()
 
     @classmethod
